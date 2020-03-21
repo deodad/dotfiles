@@ -12,12 +12,13 @@ main = do
   xmonad $ docks def
     { terminal           = "st"
     , modMask            = mod4Mask
-    , focusedBorderColor = "#E54B4B" 
+    , normalBorderColor  = "#586e75"
+    , focusedBorderColor = "#859900" 
     , layoutHook         = avoidStruts $ smartBorders $ layoutHook def
     , logHook            = dynamicLogWithPP xmobarPP
       { ppOutput  = hPutStrLn xmproc
-      , ppCurrent = xmobarColor "#FAED70" "" . wrap "[" "]"
-      , ppTitle   = xmobarColor "#9ECe58" "" . shorten 50 
+      , ppCurrent = xmobarColor "#859900" "" . wrap "[" "]"
+      , ppTitle   = xmobarColor "#b58900" "" . shorten 50 
       }
     } 
     `additionalKeysP`

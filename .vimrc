@@ -39,11 +39,6 @@ set cursorline
 colorscheme solarized
 call togglebg#map("<F5>")
 
-" airline
-let g:airline_theme = 'solarized'
-let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts = 1
-
 set clipboard=unnamedplus
 
 " numbers
@@ -115,7 +110,12 @@ nnoremap <c-p> :FZF<CR>
 " markdown editing
 au BufRead,BufNewFile *.md setlocal textwidth=80
 
+" airline
+let g:airline_theme = 'solarized'
+let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+
 " ale
 let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
-let g:airline#extensions#ale#enabled = 1

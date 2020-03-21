@@ -1,16 +1,16 @@
 Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
         , borderColor = "#37474f"
-        , bgColor = "#292d3e"
-        , fgColor = "#eceff1"
+        , bgColor = "#002b36"
+        , fgColor = "#839496"
         , position = TopW L 100
         , commands = [ Run Cpu
                          [ "--template"        , "cpu <total>%"
                          , "--minwidth"        , "2"
                          , "--Low"             , "20"
                          , "--High"            , "50"
-                         , "--low"             , "#9ECE58"
-                         , "--normal"          , "orange"
-                         , "--high"            , "#E54B4B"
+                         , "--low"             , "#859900"
+                         , "--normal"          , "#cb4b16"
+                         , "--high"            , "#dc322f"
                          ] 10
 
                      , Run Memory
@@ -18,9 +18,9 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                          , "--minwidth"        , "2"
                          , "--Low"             , "50"
                          , "--High"            , "80"
-                         , "--low"             , "#9ECE58"
-                         , "--normal"          , "orange"
-                         , "--high"            , "#E54B4B"
+                         , "--low"             , "#859900"
+                         , "--normal"          , "#cb4b16"
+                         , "--high"            , "#dc322f"
                          ] 10
 
                      , Run Wireless "wlp60s0"
@@ -29,9 +29,9 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                          , "--bfore"           , "|"
                          , "--Low"             , "40"
                          , "--High"            , "70"
-                         , "--low"             , "#E54B4B"
-                         , "--normal"          , "orange"
-                         , "--high"            , "#9ECE58"
+                         , "--low"             , "#dc322f"
+                         , "--normal"          , "#cb4b16"
+                         , "--high"            , "#859900"
                          ] 10
 
                      , Run Com "uname" ["-s","-r"] "" 36000
@@ -41,8 +41,8 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                         , "--"
                         , "--on", "<volume>%"
                         , "--off", "<volume>%"
-                        , "--onc", "#9ECE58"
-                        , "--offc", "#E54B4b"
+                        , "--onc", "#859900"
+                        , "--offc", "#586e75"
                         ] 1
 
                      , Run Date "%a %b %_d %I:%M:%S" "date" 10
@@ -53,9 +53,9 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                          [ "--template" , "bat <acstatus>"
                          , "--Low"      , "15"        -- units: %
                          , "--High"     , "60"        -- units: %
-                         , "--low"      , "#E54B4B"
-                         , "--normal"   , "orange"
-                         , "--high"     , "#9ECE58"
+                         , "--low"      , "#dc322f"
+                         , "--normal"   , "#cb4b16"
+                         , "--high"     , "#859900"
                          , "--" -- battery specific options
                                 -- discharging status
                                    , "-o" , "<left>% (<timeleft>)"
@@ -67,5 +67,5 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                     ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader%}{%cpu%   %memory%   %wlp60s0wi%   %battery%   %default:Master%     <fc=#FAED70>%date%</fc>       "
+        , template = "%StdinReader%}{%cpu%   %memory%   %wlp60s0wi%   %battery%   %default:Master%     <fc=#b58900>%date%</fc>       "
         }
