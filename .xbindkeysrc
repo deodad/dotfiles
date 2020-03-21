@@ -1,0 +1,39 @@
+# Volume up
+"amixer set Master 5%+ unmute"
+   XF86AudioRaiseVolume
+
+# Volume down
+"amixer set Master 5%- unmute"
+   XF86AudioLowerVolume
+
+# Mute
+"amixer -D pulse set Master toggle"
+   XF86AudioMute
+   
+# Play/Pause
+"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+   XF86AudioPlay
+
+# Next
+"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+   XF86AudioNext
+
+# Previous
+"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+   XF86AudioPrev
+
+# Brightness Up
+"xbacklight -inc 10"
+   XF86MonBrightnessUp
+
+# Brightness Down
+"xbacklight -dec 10"
+   XF86MonBrightnessDown
+
+# Screenshot
+"flameshot full -c -p ~/screenshots"
+   Print
+
+# Targeted Screenshot
+"flameshot gui -p ~/screenshots"
+   Shift + Print

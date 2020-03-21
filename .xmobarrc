@@ -1,0 +1,71 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+        , borderColor = "#37474f"
+        , bgColor = "#292d3e"
+        , fgColor = "#eceff1"
+        , position = TopW L 100
+        , commands = [ Run Cpu
+                         [ "--template"        , "cpu <total>%"
+                         , "--minwidth"        , "2"
+                         , "--Low"             , "20"
+                         , "--High"            , "50"
+                         , "--low"             , "#9ECE58"
+                         , "--normal"          , "orange"
+                         , "--high"            , "#E54B4B"
+                         ] 10
+
+                     , Run Memory
+                         [ "--template"        , "mem <usedratio>%"
+                         , "--minwidth"        , "2"
+                         , "--Low"             , "50"
+                         , "--High"            , "80"
+                         , "--low"             , "#9ECE58"
+                         , "--normal"          , "orange"
+                         , "--high"            , "#E54B4B"
+                         ] 10
+
+                     , Run Wireless "wlp60s0"
+                         [ "--template"        , "<essid> <qualitybar>"
+                         , "--bback"           , "."
+                         , "--bfore"           , "|"
+                         , "--Low"             , "40"
+                         , "--High"            , "70"
+                         , "--low"             , "#E54B4B"
+                         , "--normal"          , "orange"
+                         , "--high"            , "#9ECE58"
+                         ] 10
+
+                     , Run Com "uname" ["-s","-r"] "" 36000
+
+                     , Run Volume "default" "Master" 
+                        [ "--template" , "vol <status>"
+                        , "--"
+                        , "--on", "<volume>%"
+                        , "--off", "<volume>%"
+                        , "--onc", "#9ECE58"
+                        , "--offc", "#E54B4b"
+                        ] 1
+
+                     , Run Date "%a %b %_d %I:%M:%S" "date" 10
+
+                     , Run StdinReader
+
+                     , Run Battery
+                         [ "--template" , "bat <acstatus>"
+                         , "--Low"      , "15"        -- units: %
+                         , "--High"     , "60"        -- units: %
+                         , "--low"      , "#E54B4B"
+                         , "--normal"   , "orange"
+                         , "--high"     , "#9ECE58"
+                         , "--" -- battery specific options
+                                -- discharging status
+                                   , "-o" , "<left>% (<timeleft>)"
+                                   -- AC "on" status
+                                   , "-O" , "<left>% (usb)"
+                                   -- charged status
+                                   , "-i" , "<left>% (usb)"
+                        ] 50
+                    ]
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = "%StdinReader%}{%cpu%   %memory%   %wlp60s0wi%   %battery%   %default:Master%     <fc=#FAED70>%date%</fc>       "
+        }
