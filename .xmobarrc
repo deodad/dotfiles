@@ -1,6 +1,6 @@
 Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
         , borderColor = "#37474f"
-        , bgColor = "#002b36"
+        , bgColor = "#073642"
         , fgColor = "#839496"
         , position = TopW L 100
         , commands = [ Run Cpu

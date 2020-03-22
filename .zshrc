@@ -60,8 +60,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-set -o vi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
