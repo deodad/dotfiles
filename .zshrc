@@ -47,23 +47,29 @@ ZSH_THEME="robbyrussell"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Plugin settings
+
+# Customize vi-mode
+MODE_INDICATOR="%{$fg[blue]%}[NORMAl]%{$reset_color%}"
+
+# Customize fzf
+FZF_DEFAULT_OPTS='--color=16'
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  tmux
+  vi-mode
   fzf
   zsh-syntax-highlighting
-  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Customize vi-mode
-MODE_INDICATOR="%{$fg[blue]%}[NORMAl]%{$reset_color%}"
 
 # Bring incremental searching via arrow keys back in vi mode
 bindkey "^[OA" up-line-or-beginning-search
@@ -76,9 +82,6 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# fzf
-source /usr/share/fzf/key-bindings.zsh
 
 autoload -U +X bashcompinit && bashcompinit
 alias config='/usr/bin/git --git-dir=/home/dad/.cfg/ --work-tree=/home/dad'
