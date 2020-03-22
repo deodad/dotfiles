@@ -53,12 +53,23 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  fzf
   zsh-syntax-highlighting
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Customize vi-mode
+MODE_INDICATOR="%{$fg[blue]%}[NORMAl]%{$reset_color%}"
+
+# Bring incremental searching via arrow keys back in vi mode
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
