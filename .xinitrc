@@ -10,3 +10,4 @@ pgrep flameshot &> /dev/null || flameshot &> /dev/null &
 pgrep dunst &> /dev/null || dunst &> /dev/null &
 
 xmonad
+source ~/.xsession

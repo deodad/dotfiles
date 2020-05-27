@@ -1,3 +1,21 @@
+" plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'VundleVim/Vundle.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-commentary'
+Plug 'sheerun/vim-polyglot'
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'cdata/vim-tagged-template'
+Plug 'ap/vim-css-color'
+
+call plug#end()
+
+" basics
 set nocompatible
 set encoding=utf8
 set t_Co=16
@@ -11,27 +29,8 @@ set ruler
 set hlsearch
 set incsearch
 
-" plugins
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-ctrlspace/vim-ctrlspace'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'dense-analysis/ale'
-
-call vundle#end()
-
 syntax on
 filetype plugin indent on
-
-" ycm
-" let g:ycm_disable_signature_help = 1
 
 " vim-colors-solarized
 set background=dark
@@ -85,6 +84,18 @@ imap jj <Esc>
 
 nnoremap <CR> :noh<CR><CR>
 
+" easier split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" more naturals split opening
+set splitbelow splitright
+
+" fuzzy find
+nnoremap <c-p> :FZF<CR>
+
 " treeview
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -93,19 +104,6 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
 nmap <c-\> :Lexplore<CR>
-
-" easier split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" more naturals split opening
-set splitbelow
-set splitright
-
-" fuzzy find
-nnoremap <c-p> :FZF<CR>
 
 " markdown editing
 au BufRead,BufNewFile *.md setlocal textwidth=80
@@ -121,3 +119,14 @@ let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_javascript_eslint_supress_missing_config = 1
+
+" yats.vim (via polyglot)
+set re=0
+
+" tagged-template
+let g:taggedtemplate#tagSyntaxMap = { "sql": "sql" }
+
+autocmd FileType javascript,typescript : call taggedtemplate#applySyntaxMap()
+
+" deoplete
+let g:deoplete#enable_at_startup = 1

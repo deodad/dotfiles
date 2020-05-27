@@ -60,11 +60,10 @@ FZF_DEFAULT_OPTS='--color=16'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  vi-mode
+  zsh-syntax-highlighting
   git
   tmux
-  vi-mode
-  fzf
-  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -77,6 +76,9 @@ bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -85,3 +87,9 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 autoload -U +X bashcompinit && bashcompinit
 alias config='/usr/bin/git --git-dir=/home/dad/.cfg/ --work-tree=/home/dad'
+
+# ycm
+export YVM_DIR="$HOME/.yvm"
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+alias migra="docker run --network=\"host\" djrobstep/migra migra"

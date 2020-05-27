@@ -41,7 +41,7 @@ function bundle() {
 }
 
 function _setup_nvm() {
-  unset -f nvm npm node
+  unset -f nvm
   
   # Set up "nvm" could use "--no-use" to defer setup, but we are here to use it
   export NVM_DIR="$HOME/.nvm"
@@ -54,21 +54,21 @@ function nvm() {
   _setup_nvm nvm "$@"
 }
 
-function npm() {
-  _setup_nvm npm "$@"
-}
+# function npm() {
+#   _setup_nvm npm "$@"
+# }
 
-function node() {
-  _setup_nvm node "$@"
-}
+# function node() {
+#   _setup_nvm node "$@"
+# }
 
-function _setup_yvm() {
-  unset -f yvm
-  export YVM_DIR="$HOME/.yvm"
-  [ -s $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
-  "$@"
-}
+# function _setup_yvm() {
+#   unset -f yvm
+#   export YVM_DIR="$HOME/.yvm"
+#   [ -s $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+#   "$@"
+# }
 
-function yvm() {
-  _setup_yvm yvm "$@"
-}
+# function yvm() {
+#   _setup_yvm yvm "$@"
+# }

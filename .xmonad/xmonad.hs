@@ -23,6 +23,10 @@ main = do
     } 
     `additionalKeysP`
     [ ("M-p", spawn "rlaunch -f 'Liberation Mono:size=10' -h 15 -t st --color0 '#002b36' --color1 '#002b36' --color2 '#93a1a1' --color3 '#839496' --color4 '#073642'")
+    , ("M-h", prevWS)
+    , ("M-l", nextWS)
+    , ("M-S-l", sendMessage Expand)
+    , ("M-S-h", sendMessage Shrink)
     , ("M-<L>", prevWS)
     , ("M-<R>", nextWS)
     , ("M-<D>", toggleWS)
