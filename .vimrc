@@ -8,6 +8,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
+Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'cdata/vim-tagged-template'
@@ -93,8 +94,73 @@ nnoremap <C-H> <C-W><C-H>
 " more naturals split opening
 set splitbelow splitright
 
-" fuzzy find
-nnoremap <c-p> :FZF<CR>
+" markdown editing
+au BufRead,BufNewFile *.md setlocal textwidth=80
+
+
+" ctrlspace
+let g:CtrlSpaceGlobCommand = 'ag -l --hidden --nocolor -g ""'
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 0
+
+" let ctrlspace handle tabline
+set showtabline=0
+
+" navigate between errors
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+
+
+" coc
+set updatetime=300
+
+" more space for display error messages
+set cmdheight=2
+
+" don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" recently vim can merge signcolumn and number column into one
+set signcolumn=number
+
+" use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" use K to show documentation
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " treeview
 let g:netrw_banner = 0
@@ -105,8 +171,6 @@ let g:netrw_winsize = 25
 
 nmap <c-\> :Lexplore<CR>
 
-" markdown editing
-au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " airline
 let g:airline_theme = 'solarized'
@@ -114,19 +178,21 @@ let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1
 
+" setup for ctrlspace
+let g:airline_exclude_preview = 1
+
+
 " ale
 let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_javascript_eslint_supress_missing_config = 1
 
+
 " yats.vim (via polyglot)
 set re=0
 
+
 " tagged-template
 let g:taggedtemplate#tagSyntaxMap = { "sql": "sql" }
-
 autocmd FileType javascript,typescript : call taggedtemplate#applySyntaxMap()
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
