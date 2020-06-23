@@ -52,8 +52,6 @@ ZSH_THEME="robbyrussell"
 # Customize vi-mode
 MODE_INDICATOR="%{$fg[blue]%}[NORMAl]%{$reset_color%}"
 
-# Customize fzf
-FZF_DEFAULT_OPTS='--color=16'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -69,6 +67,16 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Use vim as editor
+export VISUAL=vim
+export EDITOR=vim
+
+# Customize fzf
+export FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git -g ""'
+export FZF_DEFAULT_OPTS='--color 16'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 
 # Bring incremental searching via arrow keys back in vi mode
 bindkey "^[OA" up-line-or-beginning-search

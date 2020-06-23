@@ -14,7 +14,7 @@ main = do
     , modMask            = mod4Mask
     , normalBorderColor  = "#586e75"
     , focusedBorderColor = "#6c71c4" 
-    , layoutHook         = avoidStruts $ smartBorders $ layoutHook def
+    , layoutHook         = avoidStruts $ smartBorders $ Tall 1 (3/100) (1/2) ||| Full
     , logHook            = dynamicLogWithPP xmobarPP
       { ppOutput  = hPutStrLn xmproc
       , ppCurrent = xmobarColor "#859900" "" . wrap "[" "]"
@@ -36,4 +36,3 @@ main = do
     , ("M-S-<Up>", spawn "~/.xmonad/scripts/rotate.sh --left")
     , ("M-S-<Down>", spawn "~/.xmonad/scripts/rotate.sh --down")
     ]
-

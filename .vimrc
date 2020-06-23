@@ -6,12 +6,17 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf'
+Plug 'mileszs/ack.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'vim-ctrlspace/vim-ctrlspace'
+"Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'cdata/vim-tagged-template'
+Plug 'jparise/vim-graphql'
 Plug 'ap/vim-css-color'
 
 call plug#end()
@@ -98,18 +103,31 @@ set splitbelow splitright
 au BufRead,BufNewFile *.md setlocal textwidth=80
 
 
+" airline
+let g:airline_theme = 'solarized'
+let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+
+" setup for ctrlspace
+"let g:airline_exclude_preview = 1
+
+
 " ctrlspace
-let g:CtrlSpaceGlobCommand = 'ag -l --hidden --nocolor -g ""'
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 0
 
-" let ctrlspace handle tabline
-set showtabline=0
+" " let ctrlspace handle tabline
+" set showtabline=0
 
-" navigate between errors
-nmap <silent> [g <Plug>(ale_previous_wrap)
-nmap <silent> ]g <Plug>(ale_next_wrap)
+" " use ag for searching
+" let g:CtrlSpaceGlobCommand = 'ag -l --hidden --nocolor -g ""'
+
+" " automatically save workspace
+" let g:CtrlSpaceSaveWorkspaceOnExit = 1
+" let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+" let g:CtrlSpaceLoadLastWorkspaceOnStart = 0
+
+" " fuzzy search w/ ctrl-p
+nnoremap <silent><C-p> :FZF<CR>
 
 
 " coc
@@ -162,6 +180,22 @@ endfunction
 " highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+
+" ale
+let g:ale_fixers = ['eslint']
+let g:ale_fix_on_save = 1
+let g:ale_javascript_eslint_supress_missing_config = 1
+
+" navigate between errors
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+
+
 " treeview
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -172,23 +206,6 @@ let g:netrw_winsize = 25
 nmap <c-\> :Lexplore<CR>
 
 
-" airline
-let g:airline_theme = 'solarized'
-let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#ale#enabled = 1
-
-" setup for ctrlspace
-let g:airline_exclude_preview = 1
-
-
-" ale
-let g:ale_fixers = ['eslint']
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_javascript_eslint_supress_missing_config = 1
-
-
 " yats.vim (via polyglot)
 set re=0
 
@@ -196,3 +213,9 @@ set re=0
 " tagged-template
 let g:taggedtemplate#tagSyntaxMap = { "sql": "sql" }
 autocmd FileType javascript,typescript : call taggedtemplate#applySyntaxMap()
+
+" tmux navgiator
+let g:tmux_navigator_disable_when_zoomed = 1
+
+" ack
+let g:ackprg = 'ag --vimgrep'
