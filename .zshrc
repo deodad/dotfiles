@@ -101,3 +101,5 @@ export YVM_DIR="$HOME/.yvm"
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 
 alias migra="docker run --network=\"host\" djrobstep/migra migra"
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+if [ -e /home/dad/.nix-profile/etc/profile.d/nix.sh ]; then . /home/dad/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

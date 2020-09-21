@@ -2,18 +2,19 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'VundleVim/Vundle.vim'
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf'
 Plug 'mileszs/ack.vim'
 Plug 'sheerun/vim-polyglot'
-"Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'cdata/vim-tagged-template'
 Plug 'jparise/vim-graphql'
@@ -90,6 +91,10 @@ imap jj <Esc>
 
 nnoremap <CR> :noh<CR><CR>
 
+" easier buffer navigation
+nnoremap <C-p><C-p> :bp<CR>
+nnoremap <C-n><C-n> :bn<CR>
+
 " easier split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -107,7 +112,8 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 let g:airline_theme = 'solarized'
 let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 
 " setup for ctrlspace
 "let g:airline_exclude_preview = 1
@@ -185,6 +191,8 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " ale
 let g:ale_fixers = ['eslint']
@@ -192,8 +200,8 @@ let g:ale_fix_on_save = 1
 let g:ale_javascript_eslint_supress_missing_config = 1
 
 " navigate between errors
-nmap <silent> [g <Plug>(ale_previous_wrap)
-nmap <silent> ]g <Plug>(ale_next_wrap)
+" nmap <silent> [g <Plug>(ale_previous_wrap)
+" nmap <silent> ]g <Plug>(ale_next_wrap)
 
 
 " treeview
@@ -204,7 +212,6 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
 nmap <c-\> :Lexplore<CR>
-
 
 " yats.vim (via polyglot)
 set re=0
@@ -219,3 +226,6 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " ack
 let g:ackprg = 'ag --vimgrep'
+
+" fugitive
+map <leader>g :Ggrep!  <Bar> copen

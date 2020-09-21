@@ -1,4 +1,4 @@
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+
 
 xset +dpms
 xset dpms 0 0 300
