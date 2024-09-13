@@ -41,6 +41,7 @@ cmp.setup({
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
+  ensure_installed = { "ts_ls", "eslint", "lua_ls", "rust_analyzer", "tailwindcss" },
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})
@@ -57,8 +58,8 @@ require('mason-lspconfig').setup({
       })
     end,
 
-    tsserver = function()
-      require('lspconfig').tsserver.setup({
+    ts_ls = function()
+      require('lspconfig').ts_ls.setup({
         init_options = {
            preferences = {
             importModuleSpecifierPreference = "non-relative",
