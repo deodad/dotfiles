@@ -71,11 +71,10 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
   docker
+  docker-compose
   git
   fzf
-  autojump
 )
 
 # auto-update, dont bug me
@@ -85,31 +84,12 @@ source $ZSH/oh-my-zsh.sh
 fpath+=~/.zfunc
 
 # Plugin configuration
-# export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # User configuration
 autoload -U compinit
 compinit -i
-
-# Enable vi mode
-bindkey -v
-
-# no beep
-unsetopt BEEP
-
-zstyle ':urlglobber' url-other-schema
-
-# dotfiles
-alias config='/usr/bin/git --git-dir=/Users/deodad/.cfg/ --work-tree=/Users/deodad'
-
-alias v="nvim"
-alias ls="lsd"
-alias lg='lazygit'
-alias dl='xcrun simctl openurl booted'
-alias ta='tmux attach'
-alias td='tmux detach'
-alias gt='git trim'
 
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -120,8 +100,63 @@ bindkey -M vicmd 'vv' edit-command-line
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Enable vi mode
+bindkey -v
+
+# no beep
+unsetopt BEEP
+
+zstyle ':urlglobber' url-other-schema
+
+alias v="nvim"
+alias ls="lsd"
+alias ezsh="source ~/.zshrc"
+alias szsh="source ~/.zshrc"
+alias ..="cd .."
+alias ...="cd .."
+
+# dotfiles
+alias config='/usr/bin/git --git-dir=/Users/deodad/.cfg/ --work-tree=/Users/deodad'
+
+# tmux
+alias ta='tmux attach'
+alias td='tmux detach'
+
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# git
+alias g='git' 
+alias ga='git add .'
+alias gc='git commit'
+alias gc!='git commit --amend'
+alias gca='git commit --all'
+alias gca!='git commit --all --amend'
+alias gca!!='git commit --all --amend --no-edit'
+alias gs='git status'
+alias branches='git branch --sort=-committerdate'
+alias gb='git branch'
+alias gbd='git branch --delete'
+alias gbD='git branch --delete --force'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git checkout main'
+alias gg='git switch -'
+alias gcp='git cherry-pick'
+alias gcpa='git cherry-pick --abort'
+alias gcpc='git cherry-pick --continue'
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase --interactive'
+alias grbm='git rebase main'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
+alias gt='git trim'
+alias lg='lazygit'
+
+# mobile dev
+alias dl='xcrun simctl openurl booted'
+alias dla='adb shell am start -a android.intent.action.VIEW -d'
 
 # android studio
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
@@ -136,51 +171,27 @@ compinit -i
 # rust
 source $HOME/.cargo/env
 
-# node version manager
-eval "$(fnm env --use-on-cd)"
-
 # ruby version manager
 eval "$(frum init)" 
 
 # yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 alias y="yarn"
 alias ya="yarn add"
 alias yad="yarn add --dev"
 
-alias v="nvim"
-
-# pnpm
-export PNPM_HOME="/Users/deodad/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# pnpm
-export PNPM_HOME="/Users/deodad/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
 # fnm
 export PATH="/Users/deodad/Library/Application Support/fnm:$PATH"
-eval "`fnm env --use-on-cd --version-file-strategy=recursive`"
+eval "`fnm env --use-on-cd --shell zsh`"
 
-# The next line updates PATH for the Google Cloud SDK.
+# aws
+[[ -r '/opt/homebrew/opt/awscli/libexec/bin/aws_zsh_completer.sh' ]] && source '/opt/homebrew/opt/awscli/libexec/bin/aws_zsh_completer.sh' 
+
+# google cloud
 if [ -f '/Users/deodad/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/deodad/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
 if [ -f '/Users/deodad/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/deodad/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-
-# bun completions
-[ -s "/Users/deodad/.bun/_bun" ] && source "/Users/deodad/.bun/_bun"
-
 # bun
+[ -s "/Users/deodad/.bun/_bun" ] && source "/Users/deodad/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

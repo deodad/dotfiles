@@ -28,8 +28,12 @@ opt.termguicolors = true
 opt.background = "dark"
 
 opt.scrolloff = 10
-opt.signcolumn = "yes"
 opt.isfname:append("@-@")
+
+-- Reserve a space in the gutter
+-- This will avoid an annoying layout shift in the screen
+opt.signcolumn = "yes"
+
 
 opt.updatetime = 100
 
